@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import queryString from 'query-string'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons'
 
 interface ProductItem {
   id: number
@@ -106,6 +108,7 @@ const Products: React.FC<Product> = ({ items, selectedTab }) => {
 
 export default function Index () {
   const [selectedTab, setSelectedTab] = useState<string>('products')
+  const [isBarOpen, setIsBarOpen] = useState<boolean>(false)
   const itemsPerPage = 10
   const [data, setData] = useState<ProductItem[]>([])
   const [currentPage, setCurrentPage] = useState(1)
@@ -119,6 +122,58 @@ export default function Index () {
     brand: '',
     category: ''
   })
+
+  const closeMenu = () => {
+    setIsBarOpen(false)
+  }
+
+  const openMenu = () => {
+    setIsBarOpen(true)
+  }
+
+  const MenuBar = () => {
+    return (
+    <div className={isBarOpen ? 'flex flex-col bg-gray-200 border-r border-black pt-10 pl-10 space-y-10 text-xl cursor-pointer fixed top-0 w-full h-full' : 'hidden'}>
+    <div className={isBarOpen ? 'self-start' : 'hidden'}>
+      <FontAwesomeIcon icon={faTimes} onClick={closeMenu} />
+    </div>
+    <div className="flex flex-row w-full pt-10">
+      <div
+        className={` ${
+          selectedTab === 'products'
+            ? 'h-10 w-1.5 flex items-center justify-center bg-purple-600 mr-5'
+            : 'mr-6'
+        }`}
+      ></div>
+      <b
+        className={selectedTab === 'products' ? 'text-purple-600' : ''}
+        onClick={() => {
+          setSelectedTab('products')
+        }}
+      >
+        Products
+      </b>
+    </div>
+    <div className="flex flex-row">
+      <div
+        className={` ${
+          selectedTab === 'carts'
+            ? 'h-10 w-1.5 flex items-center justify-center bg-purple-600 mr-5'
+            : 'mr-6'
+        }`}
+      ></div>
+      <b
+        className={selectedTab === 'carts' ? 'text-purple-600 mt-2' : ''}
+        onClick={() => {
+          setSelectedTab('carts')
+        }}
+      >
+        Carts
+      </b>
+    </div>
+  </div>
+    )
+  }
 
   const handlePageChange = (newPage: number) => {
     setCurrentPage(newPage)
@@ -158,8 +213,12 @@ export default function Index () {
   }
 
   return (
-    <div className="flex flex-row w-full h-full max-w-screen-lg">
-      <div className="flex flex-col w-1/4 h-screen bg-gray-200 border-r border-black pt-20 pl-10 space-y-10 text-xl cursor-pointer">
+    <div className="flex flex-col md:flex-row w-full h-full max-w-screen-lg">
+      <MenuBar />
+      <div className='md:hidden pt-10 pl-10 self-start'>
+        <FontAwesomeIcon icon={faBars} onClick={openMenu} />
+      </div>
+      <div className="md:flex flex-col w-1/4 h-screen bg-gray-200 border-r border-black pt-20 pl-10 space-y-10 text-xl cursor-pointer hidden">
         <div className="flex flex-row w-full">
           <div
             className={` ${
