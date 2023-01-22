@@ -133,7 +133,7 @@ export default function Index () {
 
   const MenuBar = () => {
     return (
-    <div className={isBarOpen ? 'flex flex-col bg-gray-200 border-r border-black pt-10 pl-10 space-y-10 text-xl cursor-pointer fixed top-0 w-full h-full' : 'hidden'}>
+    <div className={isBarOpen ? 'flex flex-col bg-gray-200 border-r border-black pt-10 pl-5 md:pl-10 space-y-10 text-xl cursor-pointer fixed top-0 w-full h-full' : 'hidden'}>
     <div className={isBarOpen ? 'self-start' : 'hidden'}>
       <FontAwesomeIcon icon={faTimes} onClick={closeMenu} />
     </div>
@@ -215,7 +215,7 @@ export default function Index () {
   return (
     <div className="flex flex-col md:flex-row w-full h-full max-w-screen-lg">
       <MenuBar />
-      <div className='md:hidden pt-10 pl-10 self-start'>
+      <div className='md:hidden pt-10 pl-5 self-start'>
         <FontAwesomeIcon icon={faBars} onClick={openMenu} />
       </div>
       <div className="md:flex flex-col w-1/4 h-screen bg-gray-200 border-r border-black pt-20 pl-10 space-y-10 text-xl cursor-pointer hidden">
