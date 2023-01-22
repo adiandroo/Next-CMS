@@ -254,7 +254,7 @@ export default function Index () {
           </b>
         </div>
       </div>
-      <div className="h-full p-10 flex flex-col w-full">
+      <div className="h-full p-3 md:p-10 flex flex-col w-full">
         <Carts />
         <Products items={displayedData} filters={filters} selectedTab={selectedTab} />
         <div className="h-full self-end flex flex-row space-x-5 pt-5">
