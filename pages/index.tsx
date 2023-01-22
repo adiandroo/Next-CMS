@@ -104,7 +104,7 @@ const Products: React.FC<Product> = ({ items, selectedTab }) => {
   )
 }
 
-export default function Home () {
+export default function Index () {
   const [selectedTab, setSelectedTab] = useState<string>('products')
   const itemsPerPage = 10
   const [data, setData] = useState<ProductItem[]>([])
