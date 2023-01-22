@@ -18,6 +18,7 @@ interface ProductItem {
 interface Product {
   items: ProductItem[]
   filters: AppliedFilters
+  selectedTab: string
 }
 
 interface AppliedFilters {
@@ -28,7 +29,7 @@ interface AppliedFilters {
   category?: string
 }
 
-const Products: React.FC<Product> = ({ items }) => {
+const Products: React.FC<Product> = ({ items, selectedTab }) => {
   const [search, setSearch] = useState('')
   const [appliedFilters] = useState({})
 
@@ -66,13 +67,11 @@ const Products: React.FC<Product> = ({ items }) => {
     }
   }, [])
 
-  const [selectedTab] = useState<string>('products')
-
   return (
     <div className=' min-w-full'>
       <div className='flex w-full justify-end pb-5'>
         <input
-        className={selectedTab === 'products' ? 'hidden' : 'block border border-gray-200 p-2'}
+          className={selectedTab === 'carts' ? 'hidden' : 'block border border-gray-200 p-2'}
           type="text"
           placeholder="Search products"
           value={search}
@@ -143,7 +142,7 @@ export default function Home () {
     return (
       <div className={selectedTab === 'products' ? 'hidden' : 'block'}>
         <p>Cart 1</p>
-        <p className='pt-10'>Details</p>
+        <p className='pt-4'>Details</p>
         <div className='border border-black bg-gray-200 flex flex-row p-5 gap-20'>
           <div>
             <p>User: Test</p>
@@ -198,7 +197,7 @@ export default function Home () {
       </div>
       <div className="h-full p-10 flex flex-col w-full">
         <Carts />
-        <Products items={displayedData} filters={filters} />
+        <Products items={displayedData} filters={filters} selectedTab={selectedTab} />
         <div className="h-full self-end flex flex-row space-x-5 pt-5">
           <button
           className=' bg-gray-300 border-2 border-black p-1.5'
